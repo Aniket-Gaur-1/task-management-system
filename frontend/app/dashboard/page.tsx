@@ -36,7 +36,7 @@ export default function Dashboard() {
       params.append('page', filters.page.toString())
       params.append('limit', filters.limit.toString())
 
-      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/tasks?${params}`, {
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/tasks?${params}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
@@ -61,7 +61,7 @@ export default function Dashboard() {
         return
       }
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/auth/refresh`, {
+      const response = await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/auth/refresh`, {
         refreshToken,
       })
 
@@ -86,7 +86,7 @@ export default function Dashboard() {
   const handleCreateTask = async (taskData: Omit<Task, 'id' | 'createdAt' | 'updatedAt'>) => {
     try {
       const token = localStorage.getItem('accessToken')
-      await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/tasks`, taskData, {
+      await axios.post(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/tasks`, taskData, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
@@ -107,7 +107,7 @@ export default function Dashboard() {
 
     try {
       const token = localStorage.getItem('accessToken')
-      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/tasks/${editingTask.id}`, taskData, {
+      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/tasks/${editingTask.id}`, taskData, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
@@ -127,7 +127,7 @@ export default function Dashboard() {
   const handleDeleteTask = async (taskId: string) => {
     try {
       const token = localStorage.getItem('accessToken')
-      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/tasks/${taskId}`, {
+      await axios.delete(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/tasks/${taskId}`, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
@@ -145,7 +145,7 @@ export default function Dashboard() {
   const handleToggleTask = async (taskId: string) => {
     try {
       const token = localStorage.getItem('accessToken')
-      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000'}/tasks/${taskId}/toggle`, {}, {
+      await axios.patch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3001'}/tasks/${taskId}/toggle`, {}, {
         headers: { Authorization: `Bearer ${token}` },
       })
 
