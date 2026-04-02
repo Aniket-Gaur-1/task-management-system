@@ -16,7 +16,7 @@
   border-left-color: #ffc107;
 }
 
-.taskItem['in-progress'] {
+.taskItem.in-progress {
   border-left-color: #2196f3;
 }
 
