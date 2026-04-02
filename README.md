@@ -1,9 +1,10 @@
 # Task Management System
 
-A full-stack task management application built with Node.js, TypeScript, Next.js, and SQLite.
+A full-stack task management application built with Node.js, TypeScript, Next.js, and PostgreSQL.
+
+🔗 **Live Demo:** https://task-management-system-5898.vercel.app
 
 ## Features
-
 - User authentication with JWT tokens
 - Task CRUD operations
 - Task filtering and searching
@@ -14,11 +15,10 @@ A full-stack task management application built with Node.js, TypeScript, Next.js
 ## Tech Stack
 
 ### Backend
-- Node.js
-- TypeScript
+- Node.js + TypeScript
 - Express.js
 - Prisma ORM
-- SQLite database
+- PostgreSQL database
 - JWT authentication
 - bcrypt password hashing
 
@@ -34,32 +34,50 @@ A full-stack task management application built with Node.js, TypeScript, Next.js
 ### Prerequisites
 - Node.js 18+
 - npm or yarn
+- PostgreSQL database (or use [Neon](https://neon.tech) / [Render](https://render.com) free tier)
 
 ### Installation
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd task-management-system
-   ```
+1. Clone the repository
+```bash
+git clone <repository-url>
+cd task-management-system
+```
 
-2. **Backend Setup**
-   ```bash
-   cd backend
-   npm install
-   npm run db:generate
-   npm run db:push
-   npm run dev
-   ```
+2. Backend Setup
+```bash
+cd backend
+npm install
+```
 
-3. **Frontend Setup** (in a new terminal)
-   ```bash
-   cd frontend
-   npm install
-   npm run dev
-   ```
+Create a `.env` file in the `backend/` directory:
+```env
+DATABASE_URL="postgresql://user:password@host:5432/dbname"
+JWT_ACCESS_SECRET="your-access-secret"
+JWT_REFRESH_SECRET="your-refresh-secret"
+PORT=3001
+FRONTEND_URL="http://localhost:3000"
+```
+```bash
+npx prisma migrate deploy
+npm run dev
+```
 
-4. **Access the application**
+3. Frontend Setup (in a new terminal)
+```bash
+cd frontend
+npm install
+```
+
+Create a `.env.local` file in the `frontend/` directory:
+```env
+NEXT_PUBLIC_API_URL="http://localhost:3001"
+```
+```bash
+npm run dev
+```
+
+4. Access the application
    - Frontend: http://localhost:3000
    - Backend API: http://localhost:3001
 
@@ -79,26 +97,25 @@ A full-stack task management application built with Node.js, TypeScript, Next.js
 - `DELETE /tasks/:id` - Delete a task
 - `PATCH /tasks/:id/toggle` - Toggle task status
 
-## Usage
+## Deployment
 
-1. Register a new account or login with existing credentials
-2. Create, edit, delete, and manage your tasks
-3. Use filters to view pending or completed tasks
-4. Search tasks by title
-5. Toggle task status with the checkmark button
+- **Frontend:** Vercel
+- **Backend:** Render
+- **Database:** Render PostgreSQL
 
 ## Project Structure
-
 ```
 task-management-system/
 ├── backend/
 │   ├── prisma/
-│   │   └── schema.prisma
+│   │   ├── schema.prisma
+│   │   └── migrations/
 │   ├── src/
-│   │   ├── auth/
-│   │   ├── tasks/
+│   │   ├── controllers/
 │   │   ├── middleware/
 │   │   ├── models/
+│   │   ├── routes/
+│   │   ├── utils/
 │   │   └── server.ts
 │   ├── package.json
 │   └── tsconfig.json
